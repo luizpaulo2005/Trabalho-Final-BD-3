@@ -5,24 +5,28 @@ function inserir_tarefa() {
   let tarefa = entrada.value;
   tarefas.push([tarefas.length + 1, tarefa]);
 
-  fetch('tarefa/', {method: 'POST', body: tarefa})
-    .then( () => mostrar_tarefas() );
+  fetch('tarefa/', {
+    method: 'POST',
+    body: JSON.stringify({nome: tarefa}),
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+  }).then( resp => {
+      mostrar_tarefas();
+  });
 }
 
 function remover_tarefa(id) {
-  for(let i = 0; i < tarefas.length; i++) {
-    if(tarefas[i][0] == id) {
-      tarefas.splice(i, 1);
-      break;
-    }
-  }
-
   fetch('tarefa/' + id, {method: 'DELETE'})
     .then( () => mostrar_tarefas() );
 }
 
 function mostrar_tarefas() {
-  fetch('tarefa/').then((resp) => {
+  fetch('tarefa/')
+  .then(resp => resp.json())
+  .then(resp => {
+    tarefas = resp.dados;
+
     let lista = document.getElementById('lista_tarefas');
     lista.innerHTML = '';
 
