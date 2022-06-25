@@ -1,4 +1,4 @@
-const {Pool} = require('pg');
+const { Pool } = require('pg');
 
 const pool = new Pool ({
   connectionString:'postgres://rmpzmrtx:cT5DPQbsOloVtVVa6GIJ2n_hkbgZIIy3@motty.db.elephantsql.com/rmpzmrtx'

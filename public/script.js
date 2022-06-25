@@ -31,10 +31,12 @@ function mostrar_tarefas() {
   
       for(let tarefa of tarefas) {
         let item = document.createElement("li");
+        item.className="list-group-item col-auto";
         let texto = document.createTextNode(tarefa.nome + ' - ');
         let botao = document.createElement("button");
         botao.innerText = 'X';
         botao.onclick = () => remover_tarefa(tarefa.id);
+        botao.className= "btn btn-primary";
           
         item.appendChild(texto);
         item.appendChild(botao);
